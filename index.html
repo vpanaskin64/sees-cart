@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=375, initial-scale=1">
+  <title>See's Candies — My Bag (A1)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ===== SITE HEADER ===================================== -->
+  <header class="site-header">
+    <button class="site-header__menu" aria-label="Menu">
+      <img src="assets/menu.svg" alt="" width="24" height="24">
+    </button>
+
+    <div class="site-header__logo">
+      <img src="assets/Sees-Logo.svg" alt="See's Candies">
+    </div>
+
+    <button class="site-header__cart" aria-label="Shopping bag">
+      <img src="assets/cart.svg" alt="" width="24" height="24">
+    </button>
+  </header>
+
+  <!-- Alert banner (shown after fulfillment switch) -->
+  <div class="alert-banner" id="alertBanner">
+    <span class="alert-banner__text" id="alertText"></span>
+    <button class="alert-banner__close" id="alertClose" aria-label="Dismiss">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 4L4 12M4 4l8 8" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- ===== SCROLL AREA ===================================== -->
+  <div class="scroll-area" id="scrollArea">
+
+    <!-- Page heading: My Bag + Continue Shopping -->
+    <div class="page-heading">
+      <h1 class="page-heading__title">My Bag</h1>
+      <a class="page-heading__link" href="#">Continue Shopping</a>
+    </div>
+
+    <!-- ===== CART BODY (both fulfillment groups) =========== -->
+    <div class="cart-body">
+
+      <!-- ─── PICKUP GROUP ─────────────────────────────── -->
+      <div class="fulfillment-group" id="pickupGroup" data-mode="pickup">
+
+        <!-- Pickup header (pickup mode) -->
+        <div class="fulfillment-header" data-mode-show="pickup">
+          <div class="fulfillment-header__row">
+            <img class="fulfillment-header__icon" src="assets/Store Icon.svg" alt="" width="24" height="24">
+            <div class="fulfillment-header__badge">
+              <span class="fulfillment-header__type">Pickup</span>
+              <span class="fulfillment-header__dot" role="presentation"></span>
+              <span class="fulfillment-header__location">Carmel Mountain Rd</span>
+            </div>
+          </div>
+          <div class="fulfillment-header__actions">
+            <a class="fulfillment-header__action-link" href="#">Change Store</a>
+            <span class="fulfillment-header__sep"></span>
+            <span class="fulfillment-header__pickup-wrap" id="changeToShippingWrap">
+              <a class="fulfillment-header__action-link" id="changeToShipping" href="#"
+                 data-change-to="shipping" data-group="pickupGroup">Change to Shipping</a>
+              <span class="fulfillment-header__tooltip" id="changeToShippingTooltip">
+                Switch to single shipment to change to shipping
+              </span>
+            </span>
+          </div>
+        </div>
+
+        <!-- Shipping header (shipping mode, hidden by default) -->
+        <div class="fulfillment-header fulfillment-header--shipping" data-mode-show="shipping" hidden>
+          <div class="fulfillment-header__left">
+            <img class="fulfillment-header__icon" src="assets/Shipping Icon.svg" alt="" width="24" height="24">
+            <span class="fulfillment-header__type">Shipping</span>
+          </div>
+          <a class="fulfillment-header__action-link" href="#"
+             data-change-to="pickup" data-group="pickupGroup">Change to Pickup</a>
+        </div>
+
+        <!-- Promo bar (shipping mode only) -->
+        <div class="promo-bar" data-mode-show="shipping" hidden>
+          <p class="promo-bar__text">
+            Add <strong>$47.00</strong> for <span class="free">FREE</span> shipping on $80+
+          </p>
+          <div class="promo-bar__details">
+            <div class="promo-bar__meta">
+              <span class="promo-bar__meta-amount">$0.00 of $80.00</span>
+              <a class="promo-bar__meta-link" href="#">Add Treats</a>
+            </div>
+            <div class="promo-bar__track">
+              <div class="promo-bar__fill" style="width:0%"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gift message (shipping mode only) -->
+        <div class="gift-message" data-mode-show="shipping" hidden>
+          <label class="gift-message__row">
+            <div class="gift-message__icon">
+              <img src="assets/Gift Icon.svg" alt="" width="20" height="20">
+            </div>
+            <span class="gift-message__label">This shipment is a gift</span>
+            <input class="gift-message__checkbox" type="checkbox" aria-label="Mark as gift">
+          </label>
+          <p class="gift-message__hint">Add free gift mesage, send receipt without a price</p>
+        </div>
+
+        <!-- Pickup items -->
+        <div class="cart-items" id="pickupItems">
+
+          <!-- Item 1: Assorted Chocolates, qty 2 -->
+          <div class="cart-item" data-item-id="pickup-1">
+            <div class="cart-item__img">
+              <img src="assets/product-imgs/image 1.jpg" alt="Assorted Chocolates">
+            </div>
+            <div class="cart-item__body">
+              <div class="cart-item__info">
+                <div class="cart-item__title-row">
+                  <span class="cart-item__name">Assorted Chocolates</span>
+                  <button class="cart-item__delete" aria-label="Remove item" data-delete="pickup-1">
+                    <img src="assets/trash.svg" alt="">
+                  </button>
+                </div>
+                <div class="cart-item__meta">
+                  <span>#500310</span>
+                  <span>15 oz</span>
+                </div>
+                <div class="cart-item__price-each">$30.00 each</div>
+              </div>
+              <div class="cart-item__actions">
+                <div class="qty-selector">
+                  <button class="qty-btn" aria-label="Decrease quantity" data-qty-dec="pickup-1">
+                    <img src="assets/minus-thin.svg" alt="">
+                  </button>
+                  <span class="qty-value" data-qty-val="pickup-1">2</span>
+                  <button class="qty-btn" aria-label="Increase quantity" data-qty-inc="pickup-1">
+                    <img src="assets/plus-thin.svg" alt="">
+                  </button>
+                </div>
+                <div class="cart-item__total">
+                  <span class="cart-item__total-label">Total</span>
+                  <span class="cart-item__total-price" data-total="pickup-1">$60.00</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 2: Assorted Chocolates, qty 1 -->
+          <div class="cart-item" data-item-id="pickup-2">
+            <div class="cart-item__img">
+              <img src="assets/product-imgs/image 2.jpg" alt="Assorted Chocolates">
+            </div>
+            <div class="cart-item__body">
+              <div class="cart-item__info">
+                <div class="cart-item__title-row">
+                  <span class="cart-item__name">Assorted Chocolates</span>
+                  <button class="cart-item__delete" aria-label="Remove item" data-delete="pickup-2">
+                    <img src="assets/trash.svg" alt="">
+                  </button>
+                </div>
+                <div class="cart-item__meta">
+                  <span>#500310</span>
+                  <span>15 oz</span>
+                </div>
+                <div class="cart-item__price-each">$30.00 each</div>
+              </div>
+              <div class="cart-item__actions">
+                <div class="qty-selector">
+                  <button class="qty-btn" aria-label="Decrease quantity" data-qty-dec="pickup-2">
+                    <img src="assets/minus-thin.svg" alt="">
+                  </button>
+                  <span class="qty-value" data-qty-val="pickup-2">1</span>
+                  <button class="qty-btn" aria-label="Increase quantity" data-qty-inc="pickup-2">
+                    <img src="assets/plus-thin.svg" alt="">
+                  </button>
+                </div>
+                <div class="cart-item__total">
+                  <span class="cart-item__total-label">Total</span>
+                  <span class="cart-item__total-price" data-total="pickup-2">$60.00</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 3: Snack Attack Tin, qty 2 -->
+          <div class="cart-item" data-item-id="pickup-3">
+            <div class="cart-item__img">
+              <img src="assets/product-imgs/image 3.jpg" alt="Snack Attack Tin">
+            </div>
+            <div class="cart-item__body">
+              <div class="cart-item__info">
+                <div class="cart-item__title-row">
+                  <span class="cart-item__name">Snack Attack Tin</span>
+                  <button class="cart-item__delete" aria-label="Remove item" data-delete="pickup-3">
+                    <img src="assets/trash.svg" alt="">
+                  </button>
+                </div>
+                <div class="cart-item__meta">
+                  <span>#500310</span>
+                  <span>15 oz</span>
+                </div>
+                <div class="cart-item__price-each">$30.00 each</div>
+              </div>
+              <div class="cart-item__actions">
+                <div class="qty-selector">
+                  <button class="qty-btn" aria-label="Decrease quantity" data-qty-dec="pickup-3">
+                    <img src="assets/minus-thin.svg" alt="">
+                  </button>
+                  <span class="qty-value" data-qty-val="pickup-3">2</span>
+                  <button class="qty-btn" aria-label="Increase quantity" data-qty-inc="pickup-3">
+                    <img src="assets/plus-thin.svg" alt="">
+                  </button>
+                </div>
+                <div class="cart-item__total">
+                  <span class="cart-item__total-label">Total</span>
+                  <span class="cart-item__total-price" data-total="pickup-3">$60.00</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /cart-items pickup -->
+      </div><!-- /fulfillment-group pickup -->
+
+
+      <!-- ─── SHIPPING GROUP ───────────────────────────── -->
+      <div class="fulfillment-group" id="shippingGroup" data-mode="shipping">
+
+        <!-- Pickup header (pickup mode, hidden by default) -->
+        <div class="fulfillment-header" data-mode-show="pickup" hidden>
+          <div class="fulfillment-header__row">
+            <img class="fulfillment-header__icon" src="assets/Store Icon.svg" alt="" width="24" height="24">
+            <div class="fulfillment-header__badge">
+              <span class="fulfillment-header__type">Pickup</span>
+              <span class="fulfillment-header__dot" role="presentation"></span>
+              <span class="fulfillment-header__location">Carmel Mountain Rd</span>
+            </div>
+          </div>
+          <div class="fulfillment-header__actions">
+            <a class="fulfillment-header__action-link" href="#">Change Store</a>
+            <span class="fulfillment-header__sep"></span>
+            <a class="fulfillment-header__action-link" href="#"
+               data-change-to="shipping" data-group="shippingGroup">Change to Shipping</a>
+          </div>
+        </div>
+
+        <!-- Shipping header (shipping mode) -->
+        <div class="fulfillment-header fulfillment-header--shipping" data-mode-show="shipping">
+          <div class="fulfillment-header__left">
+            <img class="fulfillment-header__icon" src="assets/Shipping Icon.svg" alt="" width="24" height="24">
+            <span class="fulfillment-header__type">Shipping</span>
+          </div>
+          <span class="fulfillment-header__pickup-wrap" id="changeToPickupWrap">
+            <a class="fulfillment-header__action-link" id="changeToPickup" href="#"
+               data-change-to="pickup" data-group="shippingGroup">Change to Pickup</a>
+            <span class="fulfillment-header__tooltip" id="changeToPickupTooltip">
+              Unsubscribe from all products first
+            </span>
+          </span>
+        </div>
+
+        <!-- Promo bar (shipping mode) -->
+        <div class="promo-bar" data-mode-show="shipping">
+          <p class="promo-bar__text">
+            Add <strong>$47.00</strong> for <span class="free">FREE</span> shipping on $80+
+          </p>
+          <div class="promo-bar__details">
+            <div class="promo-bar__meta">
+              <span class="promo-bar__meta-amount">$33.00 of $80.00</span>
+              <a class="promo-bar__meta-link" href="#">Add Treats</a>
+            </div>
+            <div class="promo-bar__track">
+              <div class="promo-bar__fill"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gift message (shipping mode) -->
+        <div class="gift-message" id="giftMessage" data-mode-show="shipping">
+          <label class="gift-message__row">
+            <div class="gift-message__icon">
+              <img src="assets/Gift Icon.svg" alt="" width="20" height="20">
+            </div>
+            <span class="gift-message__label">This shipment is a gift</span>
+            <input class="gift-message__checkbox" id="giftCheckbox" type="checkbox" aria-label="Mark as gift">
+          </label>
+          <p class="gift-message__hint">Add free gift mesage, send receipt without a price</p>
+          <!-- Expanded gift content — shown when checkbox checked -->
+          <div class="gift-content" id="giftContent" hidden>
+
+            <!-- Editing sub-state -->
+            <div id="giftEditing" class="gift-content__editing">
+              <p class="gift-content__label">Add Free Gift Message</p>
+              <textarea class="gift-content__textarea" id="giftTextarea" maxlength="150"
+                placeholder="Add a sweet note &amp; include your name."></textarea>
+              <div class="gift-content__footer">
+                <span class="gift-content__counter" id="giftCounter">0/150</span>
+              </div>
+              <button class="gift-content__save" id="giftSaveBtn" disabled>SAVE MESSAGE</button>
+              <button class="gift-content__save-all" id="giftSaveAll" hidden>Save to All Recipients</button>
+            </div>
+
+            <!-- Saved sub-state (hidden until message is saved) -->
+            <div id="giftSaved" hidden>
+              <p class="gift-content__message-text" id="giftSavedText"></p>
+              <div class="gift-content__saved-actions">
+                <button class="btn btn--primary" id="giftEditBtn">EDIT MESSAGE</button>
+                <button class="gift-content__remove-btn" id="giftRemoveBtn">Remove Message</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Shipping items -->
+        <div class="cart-items" id="shippingItems">
+
+          <!-- Ship item 1: Assorted Chocolates, qty 2, subscribe -->
+          <div class="cart-item" data-item-id="ship-1">
+            <div class="cart-item__img">
+              <img src="assets/product-imgs/image 4.jpg" alt="Assorted Chocolates">
+            </div>
+            <div class="cart-item__body">
+              <div class="cart-item__info">
+                <div class="cart-item__title-row">
+                  <span class="cart-item__name">Assorted Chocolates</span>
+                  <button class="cart-item__delete" aria-label="Remove item" data-delete="ship-1">
+                    <img src="assets/trash.svg" alt="">
+                  </button>
+                </div>
+                <div class="cart-item__meta">
+                  <span>#500310</span>
+                  <span>15 oz</span>
+                </div>
+                <div class="cart-item__price-each">$30.00 each</div>
+              </div>
+              <div class="cart-item__actions">
+                <div class="qty-selector">
+                  <button class="qty-btn" aria-label="Decrease quantity" data-qty-dec="ship-1">
+                    <img src="assets/minus-thin.svg" alt="">
+                  </button>
+                  <span class="qty-value" data-qty-val="ship-1">2</span>
+                  <button class="qty-btn" aria-label="Increase quantity" data-qty-inc="ship-1">
+                    <img src="assets/plus-thin.svg" alt="">
+                  </button>
+                </div>
+                <div class="cart-item__total">
+                  <span class="cart-item__total-label">Total</span>
+                  <span class="cart-item__total-price" data-total="ship-1">$60.00</span>
+                </div>
+              </div>
+              <!-- Default: Subscribe & Save CTA -->
+              <div class="subscribe-cta" data-subscribe="ship-1">
+                <span class="subscribe-cta__label">Subscribe &amp; Save</span>
+                <img class="subscribe-cta__icon" src="assets/subscribe-icon.svg" alt="↻">
+              </div>
+              <!-- Subscribed state (hidden by default) -->
+              <div class="subscribe-module" data-sub-module="ship-1" hidden>
+                <div class="subscribe-module__dropdown-group">
+                  <p class="subscribe-module__label">Delivers every:</p>
+                  <div class="subscribe-module__select">
+                    <span class="subscribe-module__select-text">2 months Recommended</span>
+                    <svg class="subscribe-module__chevron" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 9L12 15L18 9" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </div>
+                </div>
+                <button class="subscribe-module__unsubscribe" data-unsub="ship-1">Unsubscribe</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ship item 2: Assorted Chocolates, qty 1, subscribe -->
+          <div class="cart-item" data-item-id="ship-2">
+            <div class="cart-item__img">
+              <img src="assets/product-imgs/image 5.jpg" alt="Assorted Chocolates">
+            </div>
+            <div class="cart-item__body">
+              <div class="cart-item__info">
+                <div class="cart-item__title-row">
+                  <span class="cart-item__name">Assorted Chocolates</span>
+                  <button class="cart-item__delete" aria-label="Remove item" data-delete="ship-2">
+                    <img src="assets/trash.svg" alt="">
+                  </button>
+                </div>
+                <div class="cart-item__meta">
+                  <span>#500310</span>
+                  <span>15 oz</span>
+                </div>
+                <div class="cart-item__price-each">$30.00 each</div>
+              </div>
+              <div class="cart-item__actions">
+                <div class="qty-selector">
+                  <button class="qty-btn" aria-label="Decrease quantity" data-qty-dec="ship-2">
+                    <img src="assets/minus-thin.svg" alt="">
+                  </button>
+                  <span class="qty-value" data-qty-val="ship-2">1</span>
+                  <button class="qty-btn" aria-label="Increase quantity" data-qty-inc="ship-2">
+                    <img src="assets/plus-thin.svg" alt="">
+                  </button>
+                </div>
+                <div class="cart-item__total">
+                  <span class="cart-item__total-label">Total</span>
+                  <span class="cart-item__total-price" data-total="ship-2">$60.00</span>
+                </div>
+              </div>
+              <!-- Default: Subscribe & Save CTA -->
+              <div class="subscribe-cta" data-subscribe="ship-2">
+                <span class="subscribe-cta__label">Subscribe &amp; Save</span>
+                <img class="subscribe-cta__icon" src="assets/subscribe-icon.svg" alt="↻">
+              </div>
+              <!-- Subscribed state (hidden by default) -->
+              <div class="subscribe-module" data-sub-module="ship-2" hidden>
+                <div class="subscribe-module__dropdown-group">
+                  <p class="subscribe-module__label">Delivers every:</p>
+                  <div class="subscribe-module__select">
+                    <span class="subscribe-module__select-text">2 months Recommended</span>
+                    <svg class="subscribe-module__chevron" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 9L12 15L18 9" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </div>
+                </div>
+                <button class="subscribe-module__unsubscribe" data-unsub="ship-2">Unsubscribe</button>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /cart-items shipping -->
+
+        <!-- Multi-recipient CTA -->
+        <div class="multi-recipient">
+          <div>
+            <p class="multi-recipient__title">Want to ship to multiple people?</p>
+            <p class="multi-recipient__desc">You can add up to 15 recipients to your order.</p>
+          </div>
+          <button class="btn btn--outline" id="addRecipientBtn">ADD ANOTHER RECIPIENT</button>
+        </div>
+
+      </div><!-- /fulfillment-group shipping -->
+
+      <!-- ─── RECIPIENT 2 BLOCK (hidden until ADD ANOTHER RECIPIENT) ─ -->
+      <div class="recipient-block" id="recipient2Block" hidden>
+        <!-- Co-recipient header -->
+        <div class="co-recipient-header">
+          <span class="co-recipient-header__label">Recipient 2</span>
+          <button class="co-recipient-header__edit" aria-label="Edit recipient">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14.166 2.5a1.768 1.768 0 012.5 2.5L7.083 14.583l-3.333.833.833-3.333L14.166 2.5z" stroke="#111" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+        <div class="recipient-block__body">
+          <!-- Recipient name -->
+          <p class="recipient-name">Oliver Thornefield</p>
+
+          <!-- Promo section -->
+          <div class="promo-bar">
+            <p class="promo-bar__text">
+              Add <strong>$47.00</strong> for <span class="free">FREE</span> shipping on $80+
+            </p>
+            <div class="promo-bar__details">
+              <div class="promo-bar__meta">
+                <span class="promo-bar__meta-amount">$33.00 of $80.00</span>
+                <a class="promo-bar__meta-link" href="#">Add Treats</a>
+              </div>
+              <div class="promo-bar__track">
+                <div class="promo-bar__fill"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Gift message -->
+          <div class="gift-message">
+            <label class="gift-message__row">
+              <div class="gift-message__icon">
+                <img src="assets/Gift Icon.svg" alt="" width="20" height="20">
+              </div>
+              <span class="gift-message__label">This shipment is a gift</span>
+              <input class="gift-message__checkbox" type="checkbox" aria-label="Mark as gift">
+            </div>
+            <p class="gift-message__hint">Add free gift mesage, send receipt without a price</p>
+          </div>
+
+          <!-- Recipient total (collapsed, shows thumbnails) -->
+          <div>
+            <div class="recipient-total-row">
+              <span class="recipient-total-row__label">Recipient total</span>
+              <span class="recipient-total-row__amount">$64.00</span>
+              <svg class="recipient-total-row__chevron" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 7.5L10 12.5L15 7.5" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="recipient-thumb-grid" style="margin-top:12px">
+              <div class="recipient-thumb" style="max-width:68px">
+                <img src="assets/product-imgs/image 4.jpg" alt="">
+                <span class="recipient-thumb__count">1</span>
+              </div>
+              <div class="recipient-thumb" style="max-width:68px">
+                <img src="assets/product-imgs/image 5.jpg" alt="">
+                <span class="recipient-thumb__count">1</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div><!-- /cart-body -->
+
+
+    <!-- ===== SIDEBAR (below cart body) ===================== -->
+    <div class="sidebar">
+
+      <!-- Donate for Kind Hearts (visual only, no interaction yet) -->
+      <div class="donate-row">
+        <div class="donate-row__content">
+          <img class="donate-row__icon" src="assets/dontaion.svg" alt="" width="24" height="24">
+          <div class="donate-row__inner">
+            <span class="donate-row__label">Donate for Kind Hearts</span>
+            <img class="donate-row__info" src="assets/info.svg" alt="Info" width="16" height="16">
+          </div>
+        </div>
+        <button class="donate-row__plus" aria-label="Add donation">
+          <img src="assets/Plus Icon.svg" alt="" width="24" height="24">
+        </button>
+      </div>
+
+      <!-- Totals box: summary + checkout CTAs + you may also like -->
+      <div class="totals-box">
+
+        <!-- Summary row -->
+        <div class="totals-box__summary">
+          <div class="totals-box__items">
+            <span class="totals-box__items-count">3</span>
+            <span class="totals-box__items-label">Total Items</span>
+          </div>
+          <div class="totals-box__subtotal">
+            <span class="totals-box__subtotal-label">Subtotal:</span>
+            <span class="totals-box__subtotal-amount">$128.00</span>
+          </div>
+        </div>
+
+        <!-- Checkout buttons -->
+        <div class="totals-box__actions">
+          <button class="btn btn--primary">LOG IN / CREATE ACCOUNT</button>
+          <button class="btn btn--outline">CHECKOUT AS GUEST</button>
+          <button class="btn--paypal">
+            <img src="assets/paypal logo.svg" alt="PayPal">
+          </button>
+        </div>
+
+      </div><!-- /totals-box -->
+
+    </div><!-- /sidebar -->
+
+  </div><!-- /scroll-area -->
+
+</div><!-- /page -->
+
+  <!-- ===== MULTI-RECIPIENT MODAL ============================= -->
+  <div class="mr-overlay" id="mrOverlay">
+    <div class="mr-modal">
+
+      <!-- ─── STEP 1: WHO ARE YOU SENDING TO? ─────────────── -->
+      <div class="mr-step" id="mrStep1">
+
+        <div class="mr-header">
+          <div class="mr-header__text">
+            <h2 class="mr-title">Who are you sending to?</h2>
+            <p class="mr-breadcrumbs">
+              <span class="mr-breadcrumb mr-breadcrumb--active">Name recipients</span>
+              <span class="mr-breadcrumb-sep">·</span>
+              <button class="mr-breadcrumb mr-breadcrumb--inactive mr-breadcrumb--link" id="mrBreadcrumbNext" disabled>Assign items</button>
+            </p>
+          </div>
+          <button class="mr-close" id="mrClose1" aria-label="Close">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M15 5L5 15M5 5l10 10" stroke="#111" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="mr-body">
+          <a class="mr-switch-single-link" id="mrSwitchToSingle" href="#" hidden>Switch to single shipment</a>
+          <p class="mr-hint">ZIP codes help us estimate shipping costs and show eligible promotions per recipient. Full addresses collected at checkout.</p>
+          <div id="mrFormList"></div>
+          <button class="mr-add-link" id="mrAddMoreBtn">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M6 1v10M1 6h10" stroke="#111" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+            Add Another Recipient
+          </button>
+        </div>
+
+        <div class="mr-footer">
+          <button class="btn btn--primary" id="mrContinueBtn" disabled>CONTINUE</button>
+          <button class="btn btn--outline" id="mrCancelBtn">CANCEL</button>
+        </div>
+
+      </div><!-- /mrStep1 -->
+
+      <!-- ─── STEP 2: WHAT GOES TO EACH PERSON? ────────────── -->
+      <div class="mr-step" id="mrStep2" hidden>
+
+        <div class="mr-header">
+          <div class="mr-header__text">
+            <h2 class="mr-title">What goes to each person?</h2>
+            <p class="mr-breadcrumbs">
+              <button class="mr-breadcrumb mr-breadcrumb--inactive mr-breadcrumb--link" id="mrBreadcrumbBack">Name recipients</button>
+              <span class="mr-breadcrumb-sep">·</span>
+              <span class="mr-breadcrumb mr-breadcrumb--active">Assign items</span>
+            </p>
+          </div>
+          <button class="mr-close" id="mrClose2" aria-label="Close">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M15 5L5 15M5 5l10 10" stroke="#111" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="mr-body">
+          <p class="mr-hint">We've added your current items for everyone. Adjust or remove anything that doesn't fit.</p>
+          <div id="mrAccordionList"></div>
+        </div>
+
+        <div class="mr-footer">
+          <button class="btn btn--primary" id="mrAddNewBtn">ADD NEW RECIPIENTS</button>
+          <button class="btn btn--outline" id="mrBackBtn">BACK</button>
+        </div>
+
+      </div><!-- /mrStep2 -->
+
+    </div><!-- /mr-modal -->
+  </div><!-- /mr-overlay -->
+
+  <!-- ===== CONFIRMATION MODAL ================================ -->
+  <div class="confirm-overlay" id="confirmOverlay">
+    <div class="confirm-modal" id="confirmModal">
+
+      <!-- Header -->
+      <div class="confirm-modal__header">
+        <span class="confirm-modal__title" id="confirmTitle"></span>
+        <button class="confirm-modal__close" id="confirmClose" aria-label="Close">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 5L5 15M5 5l10 10" stroke="#111" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Body: description + product list -->
+      <div class="confirm-modal__body">
+        <p class="confirm-modal__desc" id="confirmDesc"></p>
+        <div class="confirm-modal__items" id="confirmItems"></div>
+      </div>
+
+      <!-- Action bar -->
+      <div class="confirm-modal__footer">
+        <button class="btn btn--primary" id="confirmBtn"></button>
+        <button class="btn btn--outline" id="confirmCancelBtn">CANCEL</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== EDIT RECIPIENT MODAL ============================= -->
+  <div class="er-overlay" id="erOverlay">
+    <div class="er-modal">
+
+      <div class="mr-header">
+        <h2 class="mr-title">Edit Recipient</h2>
+        <button class="mr-close" id="erClose" aria-label="Close">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 5L5 15M5 5l10 10" stroke="#111" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="mr-body">
+        <div class="mr-recipient-block">
+          <div class="mr-label-row">
+            <span class="mr-recipient-label" id="erRecipientLabel">RECIPIENT 1</span>
+          </div>
+          <div class="mr-form-row">
+            <div class="mr-field">
+              <label class="mr-field-label" for="erFirstName">First Name*</label>
+              <input class="mr-input" id="erFirstName" type="text" placeholder="First Name" autocomplete="given-name">
+            </div>
+            <div class="mr-field">
+              <label class="mr-field-label" for="erLastName">Last Name*</label>
+              <input class="mr-input" id="erLastName" type="text" placeholder="Last Name" autocomplete="family-name">
+            </div>
+          </div>
+          <div class="mr-field">
+            <label class="mr-field-label" for="erAddress">Zip Code or Address*</label>
+            <input class="mr-input" id="erAddress" type="text" placeholder="Zip Code or Address" autocomplete="street-address">
+          </div>
+        </div>
+      </div>
+
+      <div class="mr-footer">
+        <button class="btn btn--primary" id="erUpdateBtn">UPDATE &amp; CLOSE</button>
+        <button class="btn btn--outline" id="erCancelBtn">CANCEL</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== SWITCH-TO-SINGLE CONFIRMATION ==================== -->
+  <div class="confirm-overlay" id="ssOverlay">
+    <div class="confirm-modal">
+      <div class="confirm-modal__header">
+        <span class="confirm-modal__title">Switch to single shipment?</span>
+        <button class="confirm-modal__close" id="ssClose" aria-label="Close">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 5L5 15M5 5l10 10" stroke="#111" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+      <div class="confirm-modal__body">
+        <p class="confirm-modal__desc" id="ssDesc"></p>
+      </div>
+      <div class="confirm-modal__footer">
+        <button class="btn btn--primary" id="ssConfirmBtn">YES, SWITCH TO SINGLE SHIPMENT</button>
+        <button class="btn btn--outline" id="ssCancelBtn">KEEP MULTIPLE RECIPIENTS</button>
+      </div>
+    </div>
+  </div>
+
+<script src="main.js"></script>
+</body>
+</html>
